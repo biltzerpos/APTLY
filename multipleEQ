@@ -1,0 +1,63 @@
+#!/bin/sh
+
+#23/07/2017
+# Equalize all the wav files in a given folder to given frequency, width and gain.
+
+if test $# -ne 5
+  then
+    echo "Usage: multipleEQ <indir> <outdir> <freq.txt> <width.txt> <gain.txt>"
+    echo '<indir>: Input directory. Must exist and should contain wav files'
+    echo '<outdir>: Output directory. Must not exist. Will contain all equalized versions.'
+    echo '<freq.txt> A file containing one frequency per line (in Hz).'
+    echo '<width.txt> A file containing one bandwidth per line (such as 1q).'
+    echo '<gain.txt> A file containing one gain value per line (in dB).'
+	exit 1
+fi
+
+indir="$1"
+outdir="$2"
+freqFile="$3"
+widthFile="$4"
+gainFile="$5"
+
+if test ! -d "$indir"
+then
+echo "Input directory does not exist"
+exit 2
+fi
+
+if test -d "$outdir"
+then
+echo "Output directory already exists. Please provide another name for output directory"
+exit 3
+fi
+
+mkdir "$2"
+
+for track in "${indir%/}"/*.wav
+do
+  file=$(basename "$track")
+
+  while read -r line
+  do
+  	freq="$line"
+
+    while read -r line1
+    do
+	    width="$line1"
+
+      while read -r line2
+      do
+	      gain="$line2"
+        #echo "$freq"
+        #echo "$width"
+        #echo "$gain"
+	      sox -D "$track" "$outdir"/"${file%.wav}","$freq","$width","$gain".wav equalizer "$freq" "$width" "$gain"
+      done < "$gainFile"
+	
+    done < "$widthFile"
+
+  done < "$freqFile"
+
+done
+

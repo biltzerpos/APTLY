@@ -1,0 +1,77 @@
+#!/bin/sh
+
+# 17/07/2017
+# This code is used to create .mf files for use with Marsyas.
+# It takes 2 arguments: input directory and name 
+# of output directory that you want to create.
+# It traverses each subfolder in the input directory and creates
+# corresponding .mf files. 
+# If there is no subfolder, it will create only one .mf file 
+# which contains the path of all tracks. 
+
+if test $# -ne 2 
+	then
+	echo 'Usage: createMF <indir> <outdir>'
+	echo '<indir>: Input directory. Must exist and should contain either wav files, or directories containing wav files'
+	echo '<outdir>: Output directory. Must not exist. Will contain one .mf file per subdirectory of <indir>'
+	exit 1
+fi
+
+arg1="$1"
+arg2="$2"
+indir="${arg1%/}"  # Remove possible slash at the end of the arguments
+outdir="${arg2%/}"
+
+if test ! -d "$indir"
+then
+	echo "Input directory does not exist."
+	exit 2
+fi
+
+if test -d "$outdir"
+then
+	echo "Output directory already exists. Please give another name for output directory"
+	exit 3
+fi
+
+mkdir "$outdir"
+indirBaseName=$(basename "$indir")
+outfile="${outdir}"/"${indirBaseName}".mf
+touch "$outfile"
+mkdir "$outdir"/"$indirBaseName"
+
+
+for dir in "${indir}"/* 
+do
+  echo $dir
+	dirBaseName=$(basename $dir) 
+
+	if test -f "$dir"
+	then
+    if [[ "$dir" != /* ]]; then
+		  path=`pwd`
+      fileName="$path"/"$dir"
+    else
+      fileName="$dir"
+    fi
+		echo "$fileName" >> "$outfile"
+	fi
+
+	if test -d "$dir"	
+	then
+		outfile1="$outdir"/"$indirBaseName"/"$dirBaseName".mf
+		touch "$outfile1"  # create text file with the name of sub directory
+		#cd "$dir"		
+		for track in "$dir"/*.wav
+		do
+      if [[ "$dir" != /* ]]; then
+        path=`pwd`
+        fileName="$path"/"$track"
+      else
+        fileName="$track"
+      fi
+			echo "$fileName" >> "$outfile1" 
+		done
+	fi
+done
+
