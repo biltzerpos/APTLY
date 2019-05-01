@@ -7,6 +7,8 @@ outdir="$2"
 
 if test $# -ne 2
         then
+	echo "You have entered $# arguments" 
+        echo "This script requires 2 arguments. See below for more..."$'\n'
         echo "%normalize_concat"
         echo "Usage: normalize_concat.sh <indir> <outdir>"
 	echo "Enter name of input diretory as first argument, input directory should already exist and expected to 
