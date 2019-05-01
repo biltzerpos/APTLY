@@ -15,6 +15,8 @@ normValue="$3"
 
 if test $# -ne 3
         then
+	echo "You have entered $# arguments" 
+        echo "This script requires 3 arguments. See below for more..."$'\n'
         echo "%normalize"
 	echo "Usage: normalize.sh <indir> <outdir> <normValue>"
         echo "Enter name of input directory as first argument, input directory should already exist and expected to 
