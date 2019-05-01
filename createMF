@@ -11,6 +11,9 @@
 
 if test $# -ne 2 
 	then
+	echo "You have entered $# arguments" 
+   	echo "This script requires 2 arguments. See below for more..."$'\n'
+	echo "%createMF"
 	echo 'Usage: createMF <indir> <outdir>'
 	echo '<indir>: Input directory. Must exist and should contain either wav files, or directories containing wav files'
 	echo '<outdir>: Output directory. Must not exist. Will contain one .mf file per subdirectory of <indir>'
