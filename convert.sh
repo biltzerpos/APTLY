@@ -10,6 +10,8 @@ outdir="$2"
 
 if test $# -ne 2  
         then
+	echo "You have entered $# arguments" 
+   	echo "This script requires 2 arguments. See below for more..."$'\n'
         echo "%convert"
         echo "Usage: convert.sh <indir> <outdir>"
 	echo "Enter input directory that contains mp3 files as first argument"
