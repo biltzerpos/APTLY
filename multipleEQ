@@ -5,6 +5,9 @@
 
 if test $# -ne 5
   then
+    echo "You have entered $# arguments" 
+    echo "This script requires 5 arguments. See below for more..."$'\n' 
+    echo "%multipleEQ"
     echo "Usage: multipleEQ <indir> <outdir> <freq.txt> <width.txt> <gain.txt>"
     echo '<indir>: Input directory. Must exist and should contain wav files'
     echo '<outdir>: Output directory. Must not exist. Will contain all equalized versions.'
