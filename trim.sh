@@ -13,6 +13,8 @@
 
 if test $# -ne 4
         then
+	echo "You have entered $# arguments" #changed
+        echo "This script requires 4 arguments. See below for more..."$'\n'
         echo "%trim"
         echo "Usage: <indir> <outdir> <startValue> <length>"
 	echo "Enter name of input diretory as first argument, input directory should exist and expected to 
