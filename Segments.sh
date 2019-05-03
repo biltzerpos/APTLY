@@ -9,6 +9,8 @@
 
 if test $# -ne 3  # 3 arguments are required to trim a track in intervals.  
 	then
+	echo "You have entered $# arguments" 
+   	echo "This script requires 3 arguments. See below for more..."$'\n'
 	echo "%Segments"
 	echo "Usage: Segments.sh <inTrack> <outdir> <lengthSegment>"
 	echo "Enter Full path of the input track as first argument"

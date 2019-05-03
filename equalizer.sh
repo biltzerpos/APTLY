@@ -9,6 +9,8 @@ width="1q"
 
 if test $# -ne 2
         then
+	echo "You have entered $# arguments" #changed
+    	echo "This script requires 2 arguments. See below for more..."$'\n'
         echo "%equalizer"
         echo "Usage! equalizer.sh <indir> <outdir>"
 	echo "Enter name of input directory as first argument"

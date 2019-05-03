@@ -9,6 +9,8 @@
 
 if test $# -ne 2
 	then
+	echo "You have entered $# arguments" 
+   	echo "This script requires 2 arguments. See below for more..."$'\n'
 	echo "%RMS"
 	echo "Usage: RMS.sh <indir> <outdir>"
 	echo "Enter name of input diretory as first argument, input directory should already exist and expected to have 
