@@ -37,8 +37,8 @@ def generate_sequence(length, n_samples,menu_file,input_seq):
 def get_dataset(n_in, n_out, cardinality, n_samples,menu_file,input_seq, generate_seq):
 	X1, X2, y = list(), list(), list()
 	seq = np.zeros(n_in-1,dtype=int)
-	bos = [55]
-	eos = [56]
+	bos = [cardinality-2]
+	eos = [cardinality-1]
 	df = pd.read_csv(menu_file)
 	if generate_seq == 1:
 		generate_sequence(n_in-1,n_samples,menu_file,input_seq)
